@@ -1226,6 +1226,15 @@ HAL_StatusTypeDef HAL_FMAC_FilterStop(FMAC_HandleTypeDef *hfmac)
     {
       (*(hfmac->pOutputSize)) = hfmac->OutputCurrentSize;
     }
+    /* In case of DMA, abort DMA transfer */
+    if (hfmac->InputAccess == FMAC_BUFFER_ACCESS_DMA)
+    {
+      HAL_DMA_Abort(hfmac->hdmaIn);
+    }
+    if (hfmac->OutputAccess == FMAC_BUFFER_ACCESS_DMA)
+    {
+      HAL_DMA_Abort(hfmac->hdmaOut);
+    }
 
     /* Reset FMAC unit (internal pointers) */
     if (FMAC_Reset(hfmac) == HAL_ERROR)
