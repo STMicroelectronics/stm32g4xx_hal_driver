@@ -1024,6 +1024,12 @@ HAL_StatusTypeDef HAL_SPI_Receive(SPI_HandleTypeDef *hspi, uint8_t *pData, uint1
     goto error;
   }
 
+  if ((pData == NULL) || (Size == 0U))
+  {
+    errorcode = HAL_ERROR;
+    goto error;
+  }
+
   if ((hspi->Init.Mode == SPI_MODE_MASTER) && (hspi->Init.Direction == SPI_DIRECTION_2LINES))
   {
     hspi->State = HAL_SPI_STATE_BUSY_RX;
@@ -1036,12 +1042,6 @@ HAL_StatusTypeDef HAL_SPI_Receive(SPI_HandleTypeDef *hspi, uint8_t *pData, uint1
 
   /* Init tickstart for timeout management*/
   tickstart = HAL_GetTick();
-
-  if ((pData == NULL) || (Size == 0U))
-  {
-    errorcode = HAL_ERROR;
-    goto error;
-  }
 
   /* Set the transaction information */
   hspi->State       = HAL_SPI_STATE_BUSY_RX;
@@ -1696,18 +1696,17 @@ HAL_StatusTypeDef HAL_SPI_Receive_IT(SPI_HandleTypeDef *hspi, uint8_t *pData, ui
     goto error;
   }
 
+  if ((pData == NULL) || (Size == 0U))
+  {
+    errorcode = HAL_ERROR;
+    goto error;
+  }
+
   if ((hspi->Init.Direction == SPI_DIRECTION_2LINES) && (hspi->Init.Mode == SPI_MODE_MASTER))
   {
     hspi->State = HAL_SPI_STATE_BUSY_RX;
     /* Call transmit-receive function to send Dummy data on Tx line and generate clock on CLK line */
     return HAL_SPI_TransmitReceive_IT(hspi, pData, pData, Size);
-  }
-
-
-  if ((pData == NULL) || (Size == 0U))
-  {
-    errorcode = HAL_ERROR;
-    goto error;
   }
 
   /* Process Locked */
@@ -2041,6 +2040,12 @@ HAL_StatusTypeDef HAL_SPI_Receive_DMA(SPI_HandleTypeDef *hspi, uint8_t *pData, u
     goto error;
   }
 
+  if ((pData == NULL) || (Size == 0U))
+  {
+    errorcode = HAL_ERROR;
+    goto error;
+  }
+
   if ((hspi->Init.Direction == SPI_DIRECTION_2LINES) && (hspi->Init.Mode == SPI_MODE_MASTER))
   {
     hspi->State = HAL_SPI_STATE_BUSY_RX;
@@ -2054,12 +2059,6 @@ HAL_StatusTypeDef HAL_SPI_Receive_DMA(SPI_HandleTypeDef *hspi, uint8_t *pData, u
 
   /* Process Locked */
   __HAL_LOCK(hspi);
-
-  if ((pData == NULL) || (Size == 0U))
-  {
-    errorcode = HAL_ERROR;
-    goto error;
-  }
 
   /* Set the transaction information */
   hspi->State       = HAL_SPI_STATE_BUSY_RX;
