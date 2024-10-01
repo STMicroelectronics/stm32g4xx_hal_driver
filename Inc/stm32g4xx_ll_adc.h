@@ -383,7 +383,7 @@ extern "C" {
 #define TEMPSENSOR_CAL1_TEMP               (30L)                        /* Temperature at which temperature sensor
                                            has been calibrated in production for data into TEMPSENSOR_CAL1_ADDR
                                            (tolerance: +-5 DegC) (unit: DegC). */
-#define TEMPSENSOR_CAL2_TEMP               (110L)                       /* Temperature at which temperature sensor
+#define TEMPSENSOR_CAL2_TEMP               (130L)                       /* Temperature at which temperature sensor
                                            has been calibrated in production for data into TEMPSENSOR_CAL2_ADDR
                                            (tolerance: +-5 DegC) (unit: DegC). */
 #define TEMPSENSOR_CAL_VREFANALOG          (3000UL)                     /* Analog voltage reference (Vref+) value
